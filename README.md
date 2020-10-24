@@ -2,9 +2,9 @@
 
 [![N|Solid](https://www.facom.ufms.br/wp-content/uploads/2017/09/grafo_facom.png)](https://www.facom.ufms.br/)
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
+[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)]()
 
-Trabalho computação paralela, facom 2020/2 - Ministrado por professora Nahri Moreano.
+Trabalho computação paralela, facom 2020/2 - Ministrado pela professora Nahri Moreano.
 #### Objetivo:
 
   - Construir uma matriz mxn
@@ -22,8 +22,8 @@ $ ./app
 
 ### Desenvolvedores
 
-Luan Vilela Lopes
-Giovanni Pratto
+ - Luan Vilela Lopes
+ - Giovanni Pratto
 
 License
 ----

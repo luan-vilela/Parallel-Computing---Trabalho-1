@@ -1,7 +1,7 @@
 #include "stdio.h"
 #include "fifo.c"
 #include "matrix.c"
-
+#include "expansion.c"
 
 int main(){
     Fifo * fifo = createFifo();
@@ -16,11 +16,12 @@ int main(){
     int nObstacles = 1;
     scanf("%d %d", &m, &n);     // recebe tamanho da matriz
         grid = createMatrix(m, n); // cria matriz
+        setMatrix(m, n);
     scanf("%d %d", &ox, &oy);       //recebe origem
-    setOrigin(grid, ox,oy);
+    setOrigin(grid, ox,oy, 0);
     
     scanf("%d %d", &dx, &dy);       // recebe destino
-    setOrigin(grid, dx,dy);
+    setOrigin(grid, dx,dy,-2);
     scanf("%d", &nObstacles);       // número de obstaculos
 
 
@@ -31,8 +32,17 @@ int main(){
     }
     
     printf("\n-----------------------\n");
+    //printa matriz
+    for (int i=0; i < m; i++){
+        for (int j=0; j < n; j++)
+            printf("%d ", grid[i][j]);  
+        printf("\n");
+        
+    }
 
+   center(grid, ox, oy, grid[ox][oy]);
 
+    printf("\n-----------------------\n");
     //printa matriz
     for (int i=0; i < m; i++){
         for (int j=0; j < n; j++)
@@ -60,3 +70,17 @@ int main(){
     // printFifo(fifo);
 
 }
+
+/*
+8 8
+3 5
+2 1
+3
+2 2 5 1
+1 5 1 2
+2 6 2 1
+
+
+
+
+*/
