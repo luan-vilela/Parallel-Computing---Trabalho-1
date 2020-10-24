@@ -34,6 +34,8 @@ void **createObstacle(int **matrix, int x, int y, int width, int height){
         for(int j = y; j < y+height; j++)
             matrix[i][j] = -1;
     }
+}
 
-
+void **setOrigin(int **matrix, int x, int y){
+    matrix[x][y] = 0;
 }

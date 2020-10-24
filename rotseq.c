@@ -17,7 +17,10 @@ int main(){
     scanf("%d %d", &m, &n);     // recebe tamanho da matriz
         grid = createMatrix(m, n); // cria matriz
     scanf("%d %d", &ox, &oy);       //recebe origem
+    setOrigin(grid, ox,oy);
+    
     scanf("%d %d", &dx, &dy);       // recebe destino
+    setOrigin(grid, dx,dy);
     scanf("%d", &nObstacles);       // número de obstaculos
 
 
@@ -27,8 +30,8 @@ int main(){
         createObstacle(grid, x, y,width,height);
     }
     
-
     printf("\n-----------------------\n");
+
 
     //printa matriz
     for (int i=0; i < m; i++){

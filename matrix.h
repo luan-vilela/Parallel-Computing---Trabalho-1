@@ -3,5 +3,6 @@
 
 int **createMatrix(int n, int m);
 void **createObstacle(int **matrix, int x, int y, int width, int height);
+void **setOrigin(int **matrix, int x, int y);
 
 #endif

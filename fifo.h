@@ -1,7 +1,7 @@
 #ifndef FIFO_H 
 #define FIFO_H 
 
-#define INF 0
+#define INF -2
 
 // Guarda uma célula de fila
 typedef struct _data{
