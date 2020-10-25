@@ -13,23 +13,22 @@ void setMatrix(int x, int y){
     height = y;
 }
 
-void *center(int **matrix, int x, int y, int *v){
+void center(int **matrix, int x, int y, int *v){
     int currentLevel = matrix[x][y];
     int tag = v[0];
-    v[0] = v[0] + 1;    // Atualiza número da celula
 
     // Verifica se célula atual é um obstáculo.
     if(currentLevel == -1 || found == true)
-        return (NULL);
+        return ;
     
     // Verifica se célula atual é o destino.
     if(currentLevel == -2){
         found = true;
-        printf("....................x:%d - y:%d = %d......................\n", x,y,tag);
+        printf("\n:D -> Destino %dx%d\n\t level: %d\n\n", x, y,tag);
     }
 
     // Verifica se a célula atual pode ser modificada
-    if(currentLevel > tag-1){
+    if(currentLevel+1 > tag){
         // Escreve posição da célula descoberta 
         matrix[x][y] = tag;
         //up

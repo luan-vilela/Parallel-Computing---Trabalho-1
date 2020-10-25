@@ -10,10 +10,11 @@ Fifo * createFifo(){
     return fifo;
 }
 
-Data createData(int n, int m){
+Data createData(int m, int n, int level){
     Data data;
-    data.n = n;
     data.m = m;
+    data.n = n;
+    data.level = level;
     return data;
 }
 
@@ -39,7 +40,6 @@ Node removed(Fifo *queue){
     }
 
 }
-
 
 // Retorna primeiro da fila
 Data front(Fifo *queue){

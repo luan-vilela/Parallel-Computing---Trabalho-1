@@ -5,7 +5,7 @@
 
 int main(){
     Fifo * fifo = createFifo();
-
+    Data cel;
     int **grid;
 
     int x, y, width, height;
@@ -43,22 +43,50 @@ int main(){
         
     }
     
-    center(grid, ox, oy, coordenadas);
-   
-    for(int i = 0; i < 9; i++)
-        printf("%d ",coordenadas[i]);
-    // while(found != true){
-    //     coordenadas = (grid, ox, oy, grid[ox][oy]);
 
-    // }
-    printf("\n-----------------------\n");
+    //int temp = 4*4;
+    while (found != true){
+        
+        center(grid, ox, oy, coordenadas);
+        
+        for(int i = 1; i < 8; i=i+2){
+            x = coordenadas[i];
+            y = coordenadas[i+1];
+            //printf("x: %d, y: %d\n", x, y);
+            if(x != -1 && y != -1)
+                insert(fifo, createData(x,y, coordenadas[0]+1));
+        }
+        // resolver tag
+        //printFifo(fifo);
+        cel = removed(fifo).data;
+        ox = cel.m;
+        oy = cel.n;
+        coordenadas[0] = cel.level;
+
+
+        
+    }
+
+    
+            
+    printf("\n----------%d(%d%d)-------------\n", coordenadas[0], ox,oy);
     //printa matriz
+
     for (int i=0; i < m; i++){
         for (int j=0; j < n; j++)
             printf("%d ", grid[i][j]);  
         printf("\n");
-        
     }
+    
+    
+    // printf("\n-----------------------\n");
+    // //printa matriz
+    // for (int i=0; i < m; i++){
+    //     for (int j=0; j < n; j++)
+    //         printf("%d ", grid[i][j]);  
+    //     printf("\n");
+        
+    // }
 
     // // Remover node;
     // Node cel;
