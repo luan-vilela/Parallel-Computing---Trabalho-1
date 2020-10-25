@@ -10,11 +10,10 @@ Fifo * createFifo(){
     return fifo;
 }
 
-Data createData(int n, int m, int level){
+Data createData(int n, int m){
     Data data;
     data.n = n;
     data.m = m;
-    data.level = level;
     return data;
 }
 

@@ -14,15 +14,18 @@ int main(){
     int n = 0;
     int m = 0;
     int nObstacles = 1;
-    scanf("%d %d", &m, &n);     // recebe tamanho da matriz
-        grid = createMatrix(m, n); // cria matriz
-        setMatrix(m, n);
-    scanf("%d %d", &ox, &oy);       //recebe origem
-    setOrigin(grid, ox,oy, 0);
-    
-    scanf("%d %d", &dx, &dy);       // recebe destino
-    setOrigin(grid, dx,dy,-2);
-    scanf("%d", &nObstacles);       // número de obstaculos
+    int tag = 0;
+    int coordenadas[] = {tag, -1,-1, -1,-1, -1,-1, -1,-1}; // up, down, left, right
+  
+
+    scanf("%d %d", &m, &n);             // recebe tamanho da matriz
+        grid = createMatrix(m, n);      // cria matriz
+        setMatrix(m, n);                // Informa tamanho da matriz para o explorador
+    scanf("%d %d", &ox, &oy);           //recebe origem
+        setOrigin(grid, ox,oy, tag);    // Marca origem no mapa
+    scanf("%d %d", &dx, &dy);           // recebe destino
+        setOrigin(grid, dx,dy,-2);      // Marca destino no mapa
+    scanf("%d", &nObstacles);           // número de obstaculos
 
 
     // desenha obstáculo
@@ -30,18 +33,24 @@ int main(){
         scanf("%d %d %d %d", &x, &y, &width, &height);
         createObstacle(grid, x, y,width,height);
     }
-    
-    printf("\n-----------------------\n");
+
     //printa matriz
+    printf("\n-----------------------\n");
     for (int i=0; i < m; i++){
         for (int j=0; j < n; j++)
             printf("%d ", grid[i][j]);  
         printf("\n");
         
     }
+    
+    center(grid, ox, oy, coordenadas);
+   
+    for(int i = 0; i < 9; i++)
+        printf("%d ",coordenadas[i]);
+    // while(found != true){
+    //     coordenadas = (grid, ox, oy, grid[ox][oy]);
 
-   center(grid, ox, oy, grid[ox][oy]);
-
+    // }
     printf("\n-----------------------\n");
     //printa matriz
     for (int i=0; i < m; i++){

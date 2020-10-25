@@ -1,13 +1,12 @@
 #ifndef FIFO_H 
 #define FIFO_H 
 
-#define INF 99
+#define INF 12345
 
 // Guarda uma célula de fila
 typedef struct _data{
     int n;
     int m;
-    long int level;
 }Data;
 
 //Guarda uma posição na fila
@@ -31,7 +30,7 @@ void insert(Fifo *queue, Data data);
 
 Fifo * createFifo();
 
-Data createData(int n, int m, int level);
+Data createData(int n, int m);
 Data front(Fifo *queue); // início
 Data rear(Fifo *queue); // fim
 
