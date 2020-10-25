@@ -1,15 +1,31 @@
+/*
+*   fifo.c
+*   Esse arquivo faz parte do trabalho-1 de programação paralela da turma 2020/02 (t2)
+*   Faculdade Facom - UFMS
+*   
+*   Arquivo responsável pela criação de uma fila fifo.
+*
+*/
+
+/******************************************************************************************
+**                                      CABEÇALHO
+******************************************************************************************/
 #include "fifo.h"
 #include "stdio.h"
 #include "stdlib.h"
 
+/******************************************************************************************
+**                                      MÉTODOS
+******************************************************************************************/
+/* Aloca Fifo na memória */
 Fifo * createFifo(){
     Fifo * fifo;
-    fifo = (Fifo*)malloc(sizeof(Fifo));
+    fifo = (Fifo*)calloc(1,sizeof(Fifo));
     fifo->begin = NULL;
     fifo->last = NULL;
     return fifo;
 }
-
+/* Cria Data(célula) para ser usado em um nó */
 Data createData(int m, int n, int level){
     Data data;
     data.m = m;
@@ -17,11 +33,11 @@ Data createData(int m, int n, int level){
     data.level = level;
     return data;
 }
-
+/* Insere um nó na fila, recebendo uma Data(célula) */
 void insert(Fifo *queue, Data data){  
 
     Node *node;
-    node = (Node*)malloc(sizeof(Node));
+    node = (Node*)calloc(1,sizeof(Node));
     node->data = data;
     node->next = NULL;
 
@@ -32,6 +48,7 @@ void insert(Fifo *queue, Data data){
     queue->last = node;
  
 }
+/* Remove um nó dá fila */
 Node removed(Fifo *queue){
     if (queue->begin != NULL){    
         Node *node = queue->begin;
@@ -59,6 +76,11 @@ bool isEmpty(Fifo queue){
     
     return true;
 }
+
+
+/******************************************************************************************
+**                                     PRINT PARA DEBUG
+******************************************************************************************/
 void printFifo(Fifo *queue){
     Node  *aux = queue->begin;
     while(aux != NULL){

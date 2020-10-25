@@ -1,13 +1,31 @@
+/*
+*   gcc rotseq.c -o rotseq
+*/
+
+/******************************************************************************************
+**                                      CABEÇALHO
+******************************************************************************************/
 #include "stdio.h"
 #include "fifo.c"
 #include "matrix.c"
 #include "expansion.c"
+#include "omp.h"
+
+
+void printGrid(int **grid){
+    printf("\n---------------------------------------------\n");
+    for (int i=0; i < width; i++){
+        for (int j=0; j < height; j++)
+            printf("|%3d  ", grid[i][j]);  
+        printf("\n");
+    }
+}
+
 
 int main(){
     Fifo * fifo = createFifo();
     Data cel;
     int **grid;
-
     int x, y, width, height;
     int ox, oy;
     int dx, dy;
@@ -16,7 +34,11 @@ int main(){
     int nObstacles = 1;
     int tag = 0;
     int coordenadas[] = {tag, -1,-1, -1,-1, -1,-1, -1,-1}; // up, down, left, right
-  
+    
+    /* omp_get_wtime */
+    double start; 
+    double end; 
+    start = omp_get_wtime();
 
     scanf("%d %d", &m, &n);             // recebe tamanho da matriz
         grid = createMatrix(m, n);      // cria matriz
@@ -33,30 +55,23 @@ int main(){
         scanf("%d %d %d %d", &x, &y, &width, &height);
         createObstacle(grid, x, y,width,height);
     }
-
-    //printa matriz
-    printf("\n-----------------------\n");
-    for (int i=0; i < m; i++){
-        for (int j=0; j < n; j++)
-            printf("%d ", grid[i][j]);  
-        printf("\n");
-        
-    }
     
-
-    //int temp = 4*4;
+    /* Inicia exploração */
     while (found != true){
         
         center(grid, ox, oy, coordenadas);
         
+        // Percorre vetor coordenadas
+        // Vetor coordenadas contém posições vizinhas da célula ox, oy
         for(int i = 1; i < 8; i=i+2){
             x = coordenadas[i];
             y = coordenadas[i+1];
-            //printf("x: %d, y: %d\n", x, y);
+
+            // Caso o vetor tenha explorado vizinhos roda do mapa, obstáculos ou já explorados
             if(x != -1 && y != -1)
                 insert(fifo, createData(x,y, coordenadas[0]+1));
+
         }
-        // resolver tag
         //printFifo(fifo);
         cel = removed(fifo).data;
         ox = cel.m;
@@ -67,57 +82,11 @@ int main(){
         
     }
 
-    
-            
-    printf("\n----------%d(%d%d)-------------\n", coordenadas[0], ox,oy);
-    //printa matriz
+    // Cálculo de tempo de execução
+    end = omp_get_wtime(); 
+    printf("Tempo de execução: %f\n", end - start);
 
-    for (int i=0; i < m; i++){
-        for (int j=0; j < n; j++)
-            printf("%d ", grid[i][j]);  
-        printf("\n");
-    }
-    
-    
-    // printf("\n-----------------------\n");
-    // //printa matriz
-    // for (int i=0; i < m; i++){
-    //     for (int j=0; j < n; j++)
-    //         printf("%d ", grid[i][j]);  
-    //     printf("\n");
-        
-    // }
-
-    // // Remover node;
-    // Node cel;
-    // cel = removed(fifo);
-    // printf("celula %d%d removida!.\n", cel.data.n, cel.data.m);
-    // printFifo(fifo);
-
-    // cel = removed(fifo);
-    // printf("celula %d%d removida!.\n", cel.data.n, cel.data.m);
-    // printFifo(fifo);
-
-    // cel = removed(fifo);
-    // printf("celula %d%d removida!.\n", cel.data.n, cel.data.m);
-    // printFifo(fifo);
-
-    // cel = removed(fifo);
-    // printf("celula %d%d removida!.\n", cel.data.n, cel.data.m);
-    // printFifo(fifo);
-
+    //Debug para saber se realmente achou/parou a célula destino;
+    printGrid(grid);
 }
 
-/*
-8 8
-3 5
-2 1
-3
-2 2 5 1
-1 5 1 2
-2 6 2 1
-
-
-
-
-*/

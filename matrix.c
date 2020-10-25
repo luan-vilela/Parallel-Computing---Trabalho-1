@@ -1,7 +1,21 @@
+/*
+*   expansion.c
+*   Esse arquivo faz parte do trabalho-1 de programação paralela da turma 2020/02 (t2)
+*   Faculdade Facom - UFMS
+*   
+*   Arquivo responsável pela expansão e descoberta de célula.
+*
+*/
+
+/******************************************************************************************
+**                                      CABEÇALHO
+******************************************************************************************/
 #include "matrix.h"
 #include "stdio.h"
 
-
+/*
+    Cria uma matriz dinâmica mxn e coloca INF em todas as células
+*/
 int **createMatrix (int m, int n){
     int **v;  /* ponteiro para a matriz */
     int   i;    /* variavel auxiliar      */
@@ -11,10 +25,11 @@ int **createMatrix (int m, int n){
     }
   /* aloca as linhas da matriz */
     v = (int **) calloc (m, sizeof(int *));	// Um vetor de m ponteiros para float */
-        if (v == NULL) {
-            printf ("** Erro: Memoria Insuficiente **");
-            return (NULL);
-        }
+    if (v == NULL) {
+        printf ("** Erro: Memoria Insuficiente **");
+        return (NULL);
+    }
+    
   /* aloca as colunas da matriz */
     for ( i = 0; i < m; i++ ) {
         v[i] = (int*) calloc (n, sizeof(int));	/* m vetores de n floats */
@@ -25,10 +40,13 @@ int **createMatrix (int m, int n){
         // Coloca valor infinito em todas as células
         for(int j = 0; j < n; j++)
             v[i][j]= INF;
+       
+        
     }
   return v; /* retorna o ponteiro para a matriz */
 }
 
+/*  Constroi obstáculos retangulares */
 void **createObstacle(int **matrix, int x, int y, int width, int height){
     for(int i = x; i < x+width; i++){
         for(int j = y; j < y+height; j++)

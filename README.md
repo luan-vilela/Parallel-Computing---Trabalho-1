@@ -14,10 +14,11 @@ Trabalho computação paralela, facom 2020/2 - Ministrado pela professora Nahri 
 ## Compilando e executando
 Necessário ter gcc instalado na máquina.
 
+Modo sequencial:
 ```sh
 $ cd Parallel-Computing---Trabalho-1
-$ gcc gcc rotseq.c -o app 
-$ ./app
+$ gcc rotseq.c -fopenmp -o rotseq
+$ ./rotseq
 ```
 
 ### Desenvolvedores

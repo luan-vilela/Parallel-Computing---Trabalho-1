@@ -1,18 +1,32 @@
+/*
+*   expansion.c
+*   Esse arquivo faz parte do trabalho-1 de programação paralela da turma 2020/02 (t2)
+*   Faculdade Facom - UFMS
+*   
+*   Arquivo responsável pela expansão e descoberta de célula.
+*
+*/
+
+/******************************************************************************************
+**                                      CABEÇALHO
+******************************************************************************************/
 #include "expansion.h"
 #include "stdio.h"
 
-bool found = false;
+/******************************************************************************************
+**                                      VARIÁVEIS
+******************************************************************************************/
+bool found = false;         //variável de controle, true achou destino
+int width = 0, height = 0;  //Salva tamanho do mapa, para referência expansão 
 
-//Salva tamanho da matriz
-int width = 0, height = 0;
+/******************************************************************************************
+**                                      MÉTODOS
+******************************************************************************************/
 
-
-/* Seta tamanho do matriz/mapa*/
-void setMatrix(int x, int y){
-    width = x;
-    height = y;
-}
-
+/*
+    Método recebe uma coordenada x, y de uma matriz e retorna seus vizinhos.
+    Método também verifica se chegou no destino, obstáculo ou se já esteve na célula.
+*/
 void center(int **matrix, int x, int y, int *v){
     int currentLevel = matrix[x][y];
     int tag = v[0];
@@ -33,7 +47,6 @@ void center(int **matrix, int x, int y, int *v){
         matrix[x][y] = tag;
         //up
         if(y > 0){
-            //center(matrix, x, y-1, tag+1);
             v[1] = x; 
             v[2] = y-1;
         }
@@ -44,7 +57,6 @@ void center(int **matrix, int x, int y, int *v){
         }   
         //down
         if (y < height-1){
-            //center(matrix, x, y+1, tag+1);
             v[3] = x; 
             v[4] = y+1;
         }
@@ -55,7 +67,6 @@ void center(int **matrix, int x, int y, int *v){
         }
         //left
         if (x > 0){
-            //center(matrix, x-1, y, tag+1);
             v[5] = x-1; 
             v[6] = y;
         }
@@ -66,7 +77,6 @@ void center(int **matrix, int x, int y, int *v){
         }
         //right
         if (x < width-1){
-            //center(matrix, x+1, y, tag+1);
             v[7] = x+1; 
             v[8] = y;
         }
@@ -77,8 +87,10 @@ void center(int **matrix, int x, int y, int *v){
         }
         
     }
+}
 
-    
-
-
+/* Seta tamanho do matriz/mapa*/
+void setMatrix(int x, int y){
+    width = x;
+    height = y;
 }
