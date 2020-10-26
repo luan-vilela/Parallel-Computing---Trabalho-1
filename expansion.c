@@ -27,9 +27,9 @@ int width = 0, height = 0;  //Salva tamanho do mapa, para referência expansão
     Método recebe uma coordenada x, y de uma matriz e retorna seus vizinhos.
     Método também verifica se chegou no destino, obstáculo ou se já esteve na célula.
 */
-void center(int **matrix, int x, int y, int *v){
+void center(int **matrix, int x, int y, int *v, int tag){
     int currentLevel = matrix[x][y];
-    int tag = v[0];
+     v[0] = tag;
 
     // Verifica se célula atual é um obstáculo.
     if(currentLevel == -1 || found == true)

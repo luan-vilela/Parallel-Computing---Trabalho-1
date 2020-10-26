@@ -69,9 +69,9 @@ Data rear(Fifo *queue){
 
 // Verifica se a fila está vazia
 // Retorna 0 para cheia e 1 para vazia
-bool isEmpty(Fifo queue){
-    if (queue.begin != NULL)
-        if (queue.last != NULL)
+bool isEmpty(Fifo *queue){
+    if (queue->begin != NULL)
+        if (queue->last != NULL)
             return false;
     
     return true;

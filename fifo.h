@@ -1,7 +1,7 @@
 #ifndef FIFO_H 
 #define FIFO_H 
 
-#define INF 99
+#define INF 10000
 
 // Guarda uma célula de fila
 typedef struct _data{
@@ -35,7 +35,7 @@ Data createData(int m, int n, int level);
 Data front(Fifo *queue); // início
 Data rear(Fifo *queue); // fim
 
-bool isEmpty(Fifo queue);
+bool isEmpty(Fifo *queue);
 
 void printCel(Data cell);
 void printFifo(Fifo *queue);
