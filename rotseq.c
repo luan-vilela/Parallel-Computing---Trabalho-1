@@ -1,5 +1,5 @@
 /*
-*   gcc rotseq.c -o rotseq
+*   gcc rotseq.c -fopenmp -o rotseq
 */
 
 /******************************************************************************************
@@ -9,8 +9,8 @@
 #include "fifo.c"
 #include "matrix.c"
 #include "expansion.c"
+#include "backtracking.c"
 #include "omp.h"
-
 
 void printGrid(int **grid){
     printf("\n---------------------------------------------\n");
@@ -34,7 +34,8 @@ int main(){
     int nObstacles = 1;
     int tag = 0;
     int coordenadas[] = {-1,-1, -1,-1, -1,-1, -1,-1}; // up, down, left, right
-    
+    int *back_X;
+    int *back_Y;
     /* omp_get_wtime */
     double start; 
     double end; 
@@ -87,12 +88,32 @@ int main(){
         tag = cel.level;
 
     }
+
+    // Cria vetor back após achar o destino;
+    back_X = (int *) calloc (destLevel+1, sizeof(int *));
+    back_Y = (int *) calloc (destLevel+1, sizeof(int *));
+    back_X[destLevel] = destx;
+    back_Y[destLevel] = desty;
+    
+    // Backtracking
+    while(destLevel--){
+        
+        back(grid, destx, desty, back_X, back_Y);
+        destx = back_X[destLevel];
+        desty = back_Y[destLevel];
+        //printf("%d %d\n", back_X[destLevel], back_Y[destLevel]);
+    }
+
+    destLevel = tag;
+    for(int i = 0; i <= tag; i++)
+        printf("%d %d\n", back_X[i], back_Y[i]);
+
     //printFifo(fifo);
     // Cálculo de tempo de execução
     end = omp_get_wtime(); 
     printf("Tempo de execução: %f\n", end - start);
    // printf("contador: %d\n\n", count);
     //Debug para saber se realmente achou/parou a célula destino;
-   // printGrid(grid);
+    printGrid(grid);
 }
 

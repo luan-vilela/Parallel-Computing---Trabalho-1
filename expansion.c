@@ -20,7 +20,7 @@
 
 
 /******************************************************************************************
-**                                VARIÁVEIS E CONSTANTES
+**                                VARIÁVEIS E MACROS
 ******************************************************************************************/
 #define UP (y > 0)
 #define DOWN (y < height-1)
@@ -29,7 +29,8 @@
 
 bool found = false;         //variável de controle, true achou destino
 int width = 0, height = 0;  //Salva tamanho do mapa, para referência expansão 
-
+int destx, desty;                 //Salva destino                 
+int destLevel;
 /******************************************************************************************
 **                                      MÉTODOS
 ******************************************************************************************/
@@ -52,7 +53,11 @@ void center(int **matrix, int x, int y, int *v, int tag){
         // Verifica se célula atual é o destino.
         if(currentLevel == -2){
             found = true;
-            printf("\n:D -> Destino %dx%d\n\t level: %d\n\n", x, y, tag);
+            destLevel = tag;
+            matrix[x][y] = destLevel;
+            destx = x;
+            desty = y;
+            
         }
         else
             // Verifica se a célula atual pode ser modificada
