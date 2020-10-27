@@ -49,12 +49,16 @@ void insert(Fifo *queue, Data data){
  
 }
 /* Remove um nó dá fila */
-Node removed(Fifo *queue){
-    if (queue->begin != NULL){    
-        Node *node = queue->begin;
+Data removed(Fifo *queue){
+    Data data;
+    if (queue->begin != NULL){   
+        Node  *p;
+        p = queue->begin;
         queue->begin = queue->begin->next;
-        return *node;
+        data = p->data;
+        free(p);
     }
+    return data;
 
 }
 

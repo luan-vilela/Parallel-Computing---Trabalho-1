@@ -1,7 +1,7 @@
 #ifndef FIFO_H 
 #define FIFO_H 
 
-#define INF 10000
+#define INF 90
 
 // Guarda uma célula de fila
 typedef struct _data{
@@ -26,7 +26,7 @@ typedef struct _fifo{
 
 typedef enum {false, true} bool;
 
-Node removed(Fifo *queue);
+Data removed(Fifo *queue);
 void insert(Fifo *queue, Data data);
 
 Fifo * createFifo();

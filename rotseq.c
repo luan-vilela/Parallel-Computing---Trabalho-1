@@ -59,7 +59,7 @@ int main(){
     /* Inicia exploração */
     while (found != true){
         
-        center(grid, ox, oy, coordenadas);
+        center(grid, ox, oy, coordenadas, tag);
         
         // Percorre vetor coordenadas
         // Vetor coordenadas contém posições vizinhas da célula ox, oy
@@ -73,10 +73,10 @@ int main(){
 
         }
         //printFifo(fifo);
-        cel = removed(fifo).data;
+        cel = removed(fifo);
         ox = cel.m;
         oy = cel.n;
-        coordenadas[0] = cel.level;
+        tag = cel.level;
 
 
         

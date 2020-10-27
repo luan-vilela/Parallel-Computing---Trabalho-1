@@ -71,7 +71,9 @@ int main(){
     
     // thread mestre acessa a primeira vez
     center(grid, ox, oy, coordenadas, 0);
-    int count = 0;
+
+
+
     /* Inicia exploração */
    // #pragma omp for
    
@@ -89,7 +91,7 @@ int main(){
                     if(x != -1 && y != -1)
                         insert(fifo, createData(x,y, coordenadas[0]+1));
                 }
-                
+
                 #pragma omp task
                 #pragma omp parallel sections
                 {
@@ -97,7 +99,7 @@ int main(){
                     #pragma omp section
                     {
                         if(isEmpty(fifo) == false){
-                            removeCel(removed(fifo).data, grid, coordenadas);
+                            removeCel(removed(fifo), grid, coordenadas);
                         // printf("Região sequencial: thread_id = %d\t nthreads = %d\t max_threads = %d\n",
                         //     omp_get_thread_num(), omp_get_num_threads(), omp_get_max_threads());   
                         }
@@ -106,7 +108,7 @@ int main(){
                      #pragma omp section
                     {
                         if(isEmpty(fifo) == false){
-                            removeCel(removed(fifo).data, grid, coordenadas);
+                            removeCel(removed(fifo), grid, coordenadas);
                         // printf("Região sequencial: thread_id = %d\t nthreads = %d\t max_threads = %d\n",
                         //     omp_get_thread_num(), omp_get_num_threads(), omp_get_max_threads());   
                         }
@@ -115,7 +117,7 @@ int main(){
                     #pragma omp section
                     {
                         if(isEmpty(fifo) == false){
-                            removeCel(removed(fifo).data, grid, coordenadas);
+                            removeCel(removed(fifo), grid, coordenadas);
                         // printf("Região sequencial: thread_id = %d\t nthreads = %d\t max_threads = %d\n",
                         //     omp_get_thread_num(), omp_get_num_threads(), omp_get_max_threads());   
                         }
@@ -136,7 +138,7 @@ int main(){
     printf("Tempo de execução: %f\n", end - start);
 
     //Debug para saber se realmente achou/parou a célula destino;
-    // printGrid(grid);
-    // printf("count: %d\n", count);
+    printGrid(grid);
+    
 }
 
