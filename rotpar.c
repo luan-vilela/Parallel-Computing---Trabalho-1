@@ -42,7 +42,7 @@ int main(){
     int m = 0;
     int nObstacles = 1;
     int tag = 0;
-    int coordenadas[] = {tag, -1,-1, -1,-1, -1,-1, -1,-1}; // up, down, left, right
+    int coordenadas[] = {-1,-1, -1,-1, -1,-1, -1,-1}; // up, down, left, right
     
     /* omp_get_wtime */
     double start; 

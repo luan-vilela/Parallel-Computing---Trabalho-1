@@ -37,7 +37,7 @@ Data createData(int m, int n, int level){
 void insert(Fifo *queue, Data data){  
 
     Node *node;
-    node = (Node*)calloc(1,sizeof(Node));
+    node = (Node*)malloc(sizeof(Node));
     node->data = data;
     node->next = NULL;
 
@@ -50,6 +50,7 @@ void insert(Fifo *queue, Data data){
 }
 /* Remove um nó dá fila */
 Data removed(Fifo *queue){
+     
     Data data;
     if (queue->begin != NULL){   
         Node  *p;
@@ -59,6 +60,7 @@ Data removed(Fifo *queue){
         free(p);
     }
     return data;
+    
 
 }
 
@@ -86,18 +88,17 @@ bool isEmpty(Fifo *queue){
 **                                     PRINT PARA DEBUG
 ******************************************************************************************/
 void printFifo(Fifo *queue){
+    printf("\n------------ fifo ---------------\n");
     Node  *aux = queue->begin;
     while(aux != NULL){
         printCel(aux->data);
         aux = aux->next;
     }
-    printf("\n");
-     printf("\n");
+    printf("\n------------ fifo ---------------\n");
 }
 
 void printCel(Data cell){
     if (cell.m == 0) 
-        printf("\n");
-    printf("%d%d ", cell.n, cell.m);
+        printf("%d%d ", cell.m, cell.n);
     //printf("%d ", cell.level);
 }

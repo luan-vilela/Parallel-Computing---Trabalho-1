@@ -3,5 +3,6 @@
 
 void setMatrix(int x, int y);
 void center(int **matrix, int x, int y, int *v, int tag);
+int fofoqueiro(int fofoqueiro, int vizinho);
 
 #endif
